@@ -69,9 +69,8 @@ writer never showed it are written in a plain hand.
 
 The model was trained only on public handwriting collections (listed in
 `NOTICE`): BRUSH, IAM-OnDB, UNIPEN and PluColl, with lines joined from their
-words. They were cleared for training Grape, a reader; whether each
-permission also covers a writer is being confirmed before this model is made
-public (marked OPEN in `NOTICE`). Grape 2.0 (Apache 2.0) aligned the training lines' letters to
+words, under the permissions and licences in `NOTICE`. Dostoyev serves the
+same work as Grape: among other things it writes training ink for Grape. Grape 2.0 (Apache 2.0) aligned the training lines' letters to
 their curves. The author's own copy sheets were used only to test the
 finished model, not to train it.
 

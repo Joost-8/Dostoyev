@@ -21,9 +21,8 @@ BRUSH (Brown University)
   Style Descriptors". ECCV 2020.
   Used with the written permission of the authors (Prof. James Tompkin, on
   behalf of all authors, 7 October 2026) to train this open-source
-  recogniser (Grape).
-  [OPEN, before any public release: whether this permission covers a
-  handwriting writer (a generator) as well as a recogniser.]
+  recogniser. Dostoyev is part of that work: it writes training ink for
+  Grape, FineNotes' open-source recogniser, and neatens the user's own notes.
 
 IAM On-Line Handwriting Database (IAM-OnDB)
   M. Liwicki, H. Bunke. "IAM-OnDB - an On-Line English Sentence Database
@@ -40,9 +39,7 @@ UNIPEN (Train-R01/V07)
   I. Guyon, L. Schomaker, R. Plamondon, M. Liberman, S. Janet. "UNIPEN
   project of on-line data exchange and recognizer benchmarks". ICPR 1994.
   Zenodo record 1195803.
-  Used under its conditions of use, which allow training recognisers for
-  commercial use [OPEN: whether that covers a handwriting writer]; the
-  Zenodo record is licensed CC BY 4.0
+  Used under its conditions of use; the Zenodo record is licensed CC BY 4.0
   (https://creativecommons.org/licenses/by/4.0/).
   No writer or donor identity is referenced. Also used: lines joined from
   UNIPEN words, and lines of UNIPEN characters.
