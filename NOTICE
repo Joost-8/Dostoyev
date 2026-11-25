@@ -1,16 +1,17 @@
-Dostoyev 1.0, the FineNotes handwriting writer
+Dostoyev, the FineNotes handwriting writer (versions 1.0 and 2.0)
 Copyright 2026 Joost (FineNotes)
 
 Licensed under the Apache License, Version 2.0 (see LICENSE). This NOTICE
 must travel with every copy of the model files.
 
-The model is a flow-matching generator of Bezier curves (research name
-"A long"). It was trained on the handwriting below and on nothing else; no
-training sample is contained in the model files. Lines of these sets whose
-label did not match the ink were removed after a check by an AI model, as
-for Grape. Grape 2.0 (Apache 2.0, https://github.com/Joost-8/Grape) tied the
-training lines' letters to their curves. The author's own copy sheets were
-used only to test the finished model.
+The model is a flow-matching generator of Bezier curves (research names
+"A long" for 1.0, "C2 long" for 2.0). Each version was trained on the
+handwriting below and on nothing else; no training sample is contained
+in the model files. Lines of these sets whose label did not match the
+ink were removed after a check by an AI model, as for Grape. Grape 2.0
+(Apache 2.0, https://github.com/Joost-8/Grape) tied the training lines'
+letters to their curves. The author's own copy sheets were used only to
+test the finished model.
 
 ------------------------------------------------------------------------
 Handwriting (pen trajectories)

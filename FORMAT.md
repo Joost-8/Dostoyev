@@ -58,6 +58,29 @@ inputs of one type in swapped places are refused rather than fed wrongly.
   `place` int64, `length` int64, `memory` float32, `valid` bool, `summary`
   float32 → `velocity` float32
 
-A later model of another kind (a pieces model, which is shown the letters a
-text needs rather than whole lines) brings its own sections and graphs, and
-a FineNotes that knows that kind.
+`sampling` may also hold `tries` (lines written per text, the best kept;
+3 when absent).
+
+## The pieces kind (Dostoyev 2.0) also has
+
+Everything the dual kind has, and in `reference`: `letters` (how often a
+needed character is shown as a lone letter first, 0 to 1) and `otherCase`
+(a character the writer never wrote in that case is looked for in the
+other). `reference.lines` is how many of the writer's lines the pieces are
+cut from. It is shown one whole line, then words and lone letters from the
+other lines, a separator row before each piece. Its graphs, in order:
+
+- `encode`: `ref.rows` float32, `ref.mask` bool, `ref.char` int64,
+  `ref.place` int64, `ref.length` int64, `ref.position` int64 (place inside
+  its piece), `ref.piece` int64 (the piece's number), `ref.unit` int64 (0 a
+  line, 1 a word, 2 a letter), `ref.separator` bool, `drop` bool → `memory`
+  float32, `valid` bool, `summary` float32 (the memory's mean over whole-line
+  rows, which the durations read)
+- `durations`: `text.char` int64, `text.mask` bool, `summary` float32 →
+  `logits` float32
+- `velocity`: `rows` float32, `time` float32, `mask` bool, `char` int64,
+  `place` int64, `length` int64, `memory` float32, `valid` bool →
+  `velocity` float32
+
+A later model of another kind brings its own sections and graphs, and a
+FineNotes that knows that kind.
