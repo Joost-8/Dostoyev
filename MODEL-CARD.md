@@ -1,14 +1,19 @@
-# Dostoyev 2.0, the FineNotes handwriting writer
+# Dostoyev 2.1, the FineNotes handwriting writer
 
 **Status: work in progress.** Released with FineNotes' Beautify.
 
+Version 2.1 is version 2.0's network, byte for byte, with one setting
+changed in its manifest: the noise it starts a line from is 0.5 instead of
+0.7. It reads better and writes more evenly at the same likeness (see "How
+well it works").
+
 | | |
 |---|---|
-| Files | `dostoyev-2.0.json` (manifest), `dostoyev-2.0-encode.int8.onnx` (1.6 MB), `dostoyev-2.0-durations.int8.onnx` (1.6 MB), `dostoyev-2.0-velocity.int8.onnx` (10.2 MB) |
+| Files | `dostoyev-2.1.json` (manifest), `dostoyev-2.1-encode.int8.onnx` (1.6 MB), `dostoyev-2.1-durations.int8.onnx` (1.6 MB), `dostoyev-2.1-velocity.int8.onnx` (10.2 MB) |
 | Licence | Apache 2.0 (`LICENSE`); attributions in `NOTICE`, which must travel with the files |
 | Language | English (Latin letters, digits and common symbols; 95 characters, Grape 2.0's alphabet) |
 | Manifest format | 1, kind `pieces` (see `FORMAT.md`) |
-| Research name | C2 long (`GC2-long`, 2026-11-24) |
+| Research name | C2 long (`GC2-long`, 2026-11-24); the same graphs as 2.0 |
 
 ## What it does
 
@@ -30,11 +35,15 @@ person did.
   (line, word, letter). Long pen jumps are shortened.
 - **In FineNotes:** written at guidance 1.0, which needs no "no writer"
   pass, so a line takes half the work of 1.0. Each line is written twice and
-  Grape keeps the try it reads best; words Grape still misreads are written
-  again at low guidance (the repair). Only words Grape is sure of are
-  replaced, and a replacement Grape does not read back as the word keeps the
-  writer's own strokes. A neatness slider moves the guidance from 1.2 (most
-  like the writer) to 0.75 (neatest).
+  Grape keeps the try it reads best (the more even one when it reads both
+  alike); words Grape still misreads are written again at low guidance (the
+  repair). Only words Grape is sure of are replaced, and a replacement Grape
+  does not read back as the word keeps the writer's own strokes. The written
+  line is then straightened by plain geometry: each word is set flat on the
+  line, and its letters are moved toward the word's foot line and the line's
+  own lean. No letter is redrawn. A neatness slider sets how far the letters
+  go; the guidance stays at 1.0 (lower guidance gave a plainer hand that was
+  less the writer's and no more even).
 
 ## Intended use
 
@@ -54,21 +63,25 @@ Out of scope:
 
 ## How well it works
 
-Measured 2026-11-24. Character error rate in %; likeness is a writer-style
-score (higher is closer to the writer).
+Character error rate in %; likeness is a writer-style score (higher is
+closer to the writer).
 
 One try at guidance 1.0, no reader's pull, judged by Grape 1.0 (which took
-no part in the writing):
+no part in the writing), three seeds. 2.0 is the same network starting from
+noise 0.7 (measured 2026-11-24), 2.1 from 0.5 (measured 2026-11-25):
 
-| Test | Writers' own ink | Dostoyev 2.0 | Likeness |
-|---|---|---|---|
-| 283 lines of 72 writers never seen in training | 3.5 | 3.5 | 0.54 (own ink 0.52) |
-| The author's second copy sheet and 6 probe lines (his first sheet as the reference) | 23.1 | 9.4 | 0.78 |
+| Test | Writers' own ink | Dostoyev 2.0 | Dostoyev 2.1 | Likeness 2.0 → 2.1 |
+|---|---|---|---|---|
+| 283 lines of 72 writers never seen in training | 3.5 | 3.5 | 3.1 | 0.54 → 0.55 (own ink 0.52) |
+| The author's second copy sheet and 6 probe lines (his first sheet as the reference) | 23.1 | 9.4 | 8.8 | 0.78 → 0.77 |
 
 FineNotes' own code (best of 2 and the repair, with Grape 2.0 both picking
-and reading back, so that reader is not independent), on the author's
-second sheet: 4.3 % at the slider's middle, 4.1 % at "most like my ink",
-2.0 % at "neatest" (his own ink: 15.4 % by the same reader).
+and reading back, so that reader is not independent, then the
+straightening), on the author's second sheet with the slider in the middle,
+one seed: 4.5 % with 2.0, 3.9 % with 2.1 (his own ink: 15.4 % by the same
+reader). How even the written lines are, on a measure where an ordinary
+writer's own line is 1.0 and lower is more even: 0.77 with 2.0, 0.64 with
+2.1 (1.07 before FineNotes straightened what was written).
 
 Shown lone letters and the other case, it writes capitals the writer only
 wrote in small letters (a J from j's, an I from i's), which version 1.0
@@ -92,7 +105,7 @@ FineNotes' recipe), the author's sheet 5.3 % (his ink 23.1 %); on an iPad
 
 ## Training data
 
-Both versions were trained only on public handwriting collections (listed in
+Every version was trained only on public handwriting collections (listed in
 `NOTICE`): BRUSH, IAM-OnDB, UNIPEN and PluColl, with lines joined from their
 words, under the permissions and licences in `NOTICE`. Grape 2.0 (Apache
 2.0) aligned the training lines' letters to their curves. The author's own
